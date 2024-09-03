@@ -1,0 +1,21 @@
+Last updated: 09/03/2024
+
+Thank you for using our Discord Poker Bot. This Privacy Policy explains how we collect, use, and protect your information when you interact with our bot.
+
+1. Information We Collect
+User Information: The bot collects and stores Discord usernames and the earnings tracked through commands. This information is used solely for tracking and displaying players' earnings.
+No Personal Data: We do not collect any personal information such as email addresses, phone numbers, or payment details.
+2. How We Use Information
+Earnings Tracking: The information collected is used exclusively for tracking poker game earnings within your Discord server.
+No Third-Party Sharing: We do not share your data with any third parties.
+3. Data Storage
+Local Storage: All data is stored locally in a JSON file on the bot owner's server and is not transmitted to any external services.
+Data Retention: Earnings data is stored until manually deleted by the bot owner or reset through bot commands.
+4. Your Rights
+Request Deletion: You may request the deletion of your data by contacting the bot owner or using the bot’s built-in commands.
+Amendment of Data: If you believe the data stored by the bot is inaccurate, you can request a correction by contacting the bot owner.
+5. Changes to This Policy
+We may update this Privacy Policy from time to time. Any changes will be posted to this GitHub repository, and your continued use of the bot constitutes acceptance of these changes.
+
+6. Contact Us
+If you have any questions or concerns about this Privacy Policy, please contact us via the GitHub repository:
