@@ -67,6 +67,19 @@ User: !reset_earnings
 Bot: All earnings have been reset.
 
 
+
+!finish_game @player1 amount1 @player2 amount2 ...
+Description: Finalizes a poker game by recording the results for multiple players at once. The amount can be positive for winnings or negative for losses. This command will update the total earnings for each player based on the results provided.
+Usage: !finish_game @player1 amount1 @player2 amount2 ...
+Example:
+User: !finish_game @JohnDoe 50 @JaneDoe -30 @PlayerThree 20
+Bot:
+JohnDoe's earnings updated. Total earnings: 150
+JaneDoe's earnings updated. Total earnings: -10
+PlayerThree's earnings updated. Total earnings: 20
+Game finished and results have been updated.
+
+
 Data Handling
 Earnings Data:
 The bot stores earnings data locally in a JSON file (earnings.json), which allows it to keep track of players' earnings between games.
