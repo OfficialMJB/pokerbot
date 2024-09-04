@@ -10,29 +10,33 @@ Usage: !hello
 Example:
 User: !hello
 Bot: Hello, I'm the bot.
-!start_game
 
+
+!start_game
 Description: Announces the start of a new poker game in the channel.
 Usage: !start_game
 Example:
 User: !start_game
 Bot: A new poker game has started! Good luck everyone!
-!record_result @player amount
 
+
+!record_result @player amount
 Description: Records the result for a player after a game. Adds the specified amount to the player's total earnings, which can be positive (win) or negative (loss).
 Usage: !record_result @player amount
 Example:
 User: !record_result @JohnDoe 50
 Bot: JohnDoe's earnings updated. Total earnings: 150
-!check_earnings @player
 
+
+!check_earnings @player
 Description: Displays the total earnings of a specific player.
 Usage: !check_earnings @player
 Example:
 User: !check_earnings @JohnDoe
 Bot: JohnDoe has total earnings of: 150
-!leaderboard
 
+
+!leaderboard
 Description: Displays a leaderboard showing the total earnings of all players in descending order.
 Usage: !leaderboard
 Example:
@@ -41,8 +45,9 @@ Bot:
 Poker Leaderboard:
 1. JohnDoe: 150
 2. JaneDoe: 50
-!history @player
 
+
+!history @player
 Description: Shows the earnings history for a specific player. Lists each game’s result for the player.
 Usage: !history @player
 Example:
@@ -52,8 +57,9 @@ History for JohnDoe:
 Game 1: 50
 Game 2: 100
 Game 3: -50
-!reset_earnings (Administrator Only)
 
+
+!reset_earnings (Administrator Only)
 Description: Resets the earnings for all players. Only administrators can use this command.
 Usage: !reset_earnings
 Example:
