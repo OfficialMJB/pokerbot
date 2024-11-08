@@ -1,115 +1,125 @@
-Poker Bot Commands Documentation
-Command Prefix: !
-All bot commands are triggered by using the ! prefix followed by the command name.
+Poker Discord Bot Documentation
 
-Commands Overview
-!hello
+Overview
+----------
+The Poker Discord Bot is designed to facilitate poker games among players on a Discord server.
+It tracks the buy-ins, buy-outs, and overall earnings or losses of players to provide a seamless experience for those who enjoy poker.
+Players can be added or updated, and their game statistics can be tracked reliably, even if they change their Discord display names over time.
 
-Description: Sends a greeting message from the bot.
-Usage: !hello
-Example:
-User: !hello
-Bot: Hello, I'm the bot.
+How the Bot Works
+--------------------
+The bot uses the Discord API, along with SQLite, to store player information and game statistics.
+The key features include:
 
+Managing poker games with commands to start games and log results.
 
-!start_game
-Description: Announces the start of a new poker game in the channel.
-Usage: !start_game
-Example:
-User: !start_game
-Bot: A new poker game has started! Good luck everyone!
+Storing player data in an SQLite database, ensuring that statistics are tied to each player's 
+unique Discord ID rather than their changeable display name.
 
+Tracking winnings and losses of players after each game.
 
-!record_result @player amount
-Description: Records the result for a player after a game. Adds the specified amount to the player's total earnings, which can be positive (win) or negative (loss).
-Usage: !record_result @player amount
-Example:
-User: !record_result @JohnDoe 50
-Bot: JohnDoe's earnings updated. Total earnings: 150
+The main components include:
 
+Bot Commands: Commands allow users to start games, add players, and display leaderboards.
 
-!check_earnings @player
-Description: Displays the total earnings of a specific player.
-Usage: !check_earnings @player
-Example:
-User: !check_earnings @JohnDoe
-Bot: JohnDoe has total earnings of: 150
+Database Management: All player statistics are stored in an SQLite database to ensure data persistence and consistency.
 
+Discord Mentions: When logging results, players are tagged to ensure that their Discord ID is captured, 
+maintaining the integrity of the data.
+
+COMMANDS
+-----------
+Here is an overview of each command and what it does:
+
+!startgame
+
+Usage: !startgame @player1 @player2 ...
+
+Starts a new poker game with the tagged players. The bot requires at least two players to start a game.
+
+The game will not proceed if there is already an ongoing game.
+
+Player details are added or updated in the database, ensuring their most recent Discord names are recorded.
+
+!game_results
+
+Usage: !game_results @player buy-in: (100) buy-out: (200) stack: (300) net: (100)
+
+Allows a user to post the results of a completed poker game. Each player must be tagged
+using @mention and their respective game data must be provided.
+
+The bot uses regular expressions to extract player IDs and their results, ensuring that the statistics
+are correctly updated in the database.
+
+Player stats (winnings and losses) are updated based on the provided net total.
+
+Supports multiple players, all provided in the same format.
 
 !leaderboard
-Description: Displays a leaderboard showing the total earnings of all players in descending order.
+
 Usage: !leaderboard
-Example:
-User: !leaderboard
-Bot: 
-Poker Leaderboard:
-1. JohnDoe: 150
-2. JaneDoe: 50
+
+Displays the current leaderboard with all players and their cumulative winnings and losses.
+
+The data is fetched from the SQLite database, and players are sorted by their earnings.
+
+The leaderboard is displayed as a simple text list, showing player names and their statistics.
+
+KEY FEATURES
+--------------
+Unique Player Identification: Players are tracked based on their Discord ID to ensure consistency
+even if their display name changes.
+
+Database Persistence: The bot uses an SQLite database to store player statistics, ensuring that all data
+remains persistent between bot restarts.
+
+Ease of Use: The commands are simple and intuitive, allowing users to easily track poker games and view results.
+
+HOW TO USE THE BOT
+-------------------
+Starting a Game: Use !startgame followed by tagging at least two players. This initializes the game
+and adds players to the database if they are not already present.
+
+Posting Game Results: After a game, the results can be posted using !game_results. Players should be tagged,
+and their game data should be provided in the required format.
+
+Viewing the Leaderboard: Use !leaderboard to view the current standings, showing how well each player has
+performed in past games.
+
+FUTURE PLANS
+-------------
+Here are some features planned for future releases:
+
+Improved Leaderboard: Implementing Discord embeds to create a more visually appealing leaderboard that’s
+easier to read and navigate.
+
+Game History Tracking: Adding a history feature so that players can view detailed information about past games,
+including timestamps and participants.
+
+Multiple Concurrent Games: Allowing for multiple games to be played concurrently in different channels,
+improving scalability for larger Discord servers.
+
+Player Statistics Dashboard: Creating a web-based dashboard to provide players with an in-depth view of their
+performance over time, including visual graphs.
+
+Admin Control Panel: Providing admins with additional commands to manage ongoing games, reset player stats,
+or configure game settings.
+
+SECURITY NOTE
+--------------
+Important: The bot token is currently hard-coded in the script. It is crucial to move the token to a secure
+environment variable or a configuration file to protect your bot from unauthorized access.
 
 
-!history @player
-Description: Shows the earnings history for a specific player. Lists each game’s result for the player.
-Usage: !history @player
-Example:
-User: !history @JohnDoe
-Bot: 
-History for JohnDoe:
-Game 1: 50
-Game 2: 100
-Game 3: -50
+Contributing
+------------
+Contributions are welcome! If you want to add features or help improve the bot, please feel free to submit
+a pull request on the GitHub repository. Future improvements are listed above, but new ideas are always appreciated.
 
 
-!reset_earnings (Administrator Only)
-Description: Resets the earnings for all players. Only administrators can use this command.
-Usage: !reset_earnings
-Example:
-User: !reset_earnings
-Bot: All earnings have been reset.
+CONTACT
+---------
+If you have any questions or need assistance, please reach out to the bot developer or create an issue
+on the GitHub repository.
 
 
-
-!finish_game @player1 amount1 @player2 amount2 ...
-Description: Finalizes a poker game by recording the results for multiple players at once. The amount can be positive for winnings or negative for losses. This command will update the total earnings for each player based on the results provided.
-Usage: !finish_game @player1 amount1 @player2 amount2 ...
-Example:
-User: !finish_game @JohnDoe 50 @JaneDoe -30 @PlayerThree 20
-Bot:
-JohnDoe's earnings updated. Total earnings: 150
-JaneDoe's earnings updated. Total earnings: -10
-PlayerThree's earnings updated. Total earnings: 20
-Game finished and results have been updated.
-
-
-Data Handling
-Earnings Data:
-The bot stores earnings data locally in a JSON file (earnings.json), which allows it to keep track of players' earnings between games.
-Each player's earnings are associated with their unique Discord ID, so if a player changes their name, their earnings history remains intact.
-Additional Information
-Earnings Summation:
-
-The !record_result command will automatically sum up the player’s earnings as the bot tracks both wins and losses.
-For example, if a player wins 50 one week and loses 25 the next, their total will be adjusted accordingly.
-
-
-Leaderboard Ranking:
-The leaderboard ranks players by their total earnings, with the highest earners listed first.
-
-
-
-
-
-Future Expansion Ideas
-
-
-
-Date Tracking:
-In the future, you could enhance the !history command by adding date information for each game.
-Game Result Verification:
-You could add features that allow other players to confirm game results before updating the earnings.
-
-
-Troubleshooting
-If any commands do not work as expected, ensure:
-The bot has the necessary permissions in the Discord server.
-The bot is online and running without errors.
-You have enabled Message Content Intent in the Discord Developer Portal.
